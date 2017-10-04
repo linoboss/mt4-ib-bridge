@@ -1,0 +1,24 @@
+{
+  "name": "mt4-ib-bridge",
+  "version": "1.0.0",
+  "description": "Bridge MT4 and Interactive Borkers",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linoboss/mt4-ib-bridge.git"
+  },
+  "keywords": [
+    "mt4",
+    "interactive",
+    "brokers"
+  ],
+  "author": "Lino Bossio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linoboss/mt4-ib-bridge/issues"
+  },
+  "homepage": "https://github.com/linoboss/mt4-ib-bridge#readme"
+}
