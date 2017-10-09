@@ -7,18 +7,14 @@ var bodyParser = require('body-parser');
 var mongoose = require("mongoose");
 
 // DATABASE
-mongoose.connect("mongodb://127.0.0.1/mt4_ib_bridge")
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
-  console.log("Database connected.");
+mongoose.connect("mongodb://127.0.0.1/mt4_ib_bridge", function(error){
+  if(error) throw error;
+  console.log("Database connected.");  
 });
 
 var operations = require("./models/operations")(app, mongoose)
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -35,7 +31,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

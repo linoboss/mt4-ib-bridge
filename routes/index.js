@@ -3,12 +3,17 @@ var OperationCtrl = require("../controllers/operations")
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.route('/')
+  .get(function(req, res, next){
+    res.render('index', { title: 'MT4-IB Bridge' });
+  })
+  .post(OperationCtrl.addOperation)
 
-router.post("/", OperationCtrl.addOperation)
+router.route("/operations")
+  .get(OperationCtrl.getUnseen)
+  .post(OperationCtrl.markAsSeen);
 
-router.post("/operations",  OperationCtrl.addOperation);
+router.route("/operations/all")
+  .get(OperationCtrl.getAll)
 
 module.exports = router;
