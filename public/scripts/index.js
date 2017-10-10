@@ -1,10 +1,12 @@
 $(document).ready(function(){
     $("button").click(function(){
-        price = parseInt($(".entrada")[0].value);
+        symbol = $(".symbol")[0].value
+        price = parseInt($(".price")[0].value);
         date = "22000";
         console.log(price, date)
         $.post("http://localhost:3000",
         {
+            symbol: symbol,
             price: price,
             date: date
         },
