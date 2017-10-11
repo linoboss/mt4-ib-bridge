@@ -3,9 +3,10 @@ var Operation = mongoose.model("Operation");
 
 module.exports.addOperation = function(req, res){
     var operation = new Operation({
+        "symbol": req.body.symbol,
         "price": req.body.price,
-        "date": req.body.date,
-        "seen": false
+        "date": Date.now(),
+        "discarded": false
     });
     operation.save(function(err, oper) {        
 		if(err){
@@ -16,7 +17,7 @@ module.exports.addOperation = function(req, res){
 };
 
 module.exports.getUnseen = function(req, res){
-    Operation.find({"seen": false}, function(error, operations){
+    Operation.find({"discarded": false}, function(error, operations){
         if(error) throw error;
         res.send(operations)        
     })
