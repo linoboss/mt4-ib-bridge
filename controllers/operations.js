@@ -6,6 +6,8 @@ module.exports.addOperation = function(req, res){
         "symbol": req.body.symbol,
         "price": req.body.price,
         "date": Date.now(),
+        "take_profit": req.body.take_profit,
+        "stop_loss": req.body.stop_loss,
         "discarded": false
     });
     operation.save(function(err, oper) {        
@@ -23,19 +25,18 @@ module.exports.getUnseen = function(req, res){
     })
 };
 
-module.exports.markAsSeen = function(req, res){
-    ids = JSON.parse(req.body.ids);
+module.exports.markAsSeen = function(req, res, next){
+    ids = req.body.ids;
     for(id of ids){
         Operation.findById(id, function(error, operation){
             if(error) console.log(id, "no existe");
-            if(!operation) res.status(300);
-            operation.seen = true;
-            operation.save(function(error, updated_operation){
+            operation.discarded = true;
+            operation.save(function(error, updated_operation){                
                 if(error) throw Error(error);
             }); 
         });
     }
-    res.send("ok")
+    res.send("ok");
 }
 
 module.exports.getAll = function(req, res){

@@ -18,9 +18,11 @@ Sencilla interfaz para simular la transmision de datos.
 
 Transmite una operacion al servidor. JSON:
 
-    {
-        price: float,
-        date: str
+    {   
+        symbol: String
+        price: Number,
+        stop_loss: Number,
+        take_profit: Number
     }
 
 ### get '/operations'
